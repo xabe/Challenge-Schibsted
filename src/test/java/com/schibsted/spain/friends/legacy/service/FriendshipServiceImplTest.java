@@ -1,6 +1,6 @@
 package com.schibsted.spain.friends.legacy.service;
 
-import com.schibsted.spain.friends.legacy.exception.SignupLegacyException;
+import com.schibsted.spain.friends.legacy.exception.FriendShipException;
 import com.schibsted.spain.friends.legacy.model.User;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -31,7 +31,7 @@ public class FriendshipServiceImplTest {
         MatcherAssert.assertThat(this.friendshipService.getFriendships(), Matchers.is(Matchers.hasSize(1)));
     }
 
-    @Test(expected = SignupLegacyException.class)
+    @Test(expected = FriendShipException.class)
     public void givenAUserFromAndUserToWhenInvokePushFriendshipThrowException() throws Exception {
         //Given
         final User userFrom = new User("x","y");
@@ -59,7 +59,7 @@ public class FriendshipServiceImplTest {
     }
 
 
-    @Test(expected = SignupLegacyException.class)
+    @Test(expected = FriendShipException.class)
     public void givenAUserFromWhenInvokeAcceptRequestFriendThrowException() throws Exception {
         //Given
         final User userFrom = new User("x","y");
@@ -91,7 +91,7 @@ public class FriendshipServiceImplTest {
     }
 
 
-    @Test(expected = SignupLegacyException.class)
+    @Test(expected = FriendShipException.class)
     public void givenAUserFromWhenInvokeDeclineRequestFriendThrowException() throws Exception {
         //Given
         final User userFrom = new User("x","y");

@@ -1,6 +1,6 @@
 package com.schibsted.spain.friends.legacy.context;
 
-import com.schibsted.spain.friends.legacy.exception.SignupLegacyException;
+import com.schibsted.spain.friends.legacy.exception.FriendShipException;
 import com.schibsted.spain.friends.legacy.model.User;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +20,7 @@ public class SessionContextImpl implements SessionContext {
     @Override
     public void pushUser(User user) {
         if(userMap.containsKey(user.getUser())){
-            throw new SignupLegacyException("User ");
+            throw new FriendShipException("User ");
         }
         userMap.putIfAbsent(user.getUser(), user);
     }

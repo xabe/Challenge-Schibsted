@@ -1,7 +1,7 @@
 package com.schibsted.spain.friends.legacy;
 
 import com.schibsted.spain.friends.legacy.context.SessionContext;
-import com.schibsted.spain.friends.legacy.exception.SignupLegacyException;
+import com.schibsted.spain.friends.legacy.exception.FriendShipException;
 import com.schibsted.spain.friends.legacy.model.User;
 import com.schibsted.spain.friends.legacy.validate.ValidateUser;
 import org.hamcrest.MatcherAssert;
@@ -30,7 +30,7 @@ public class SignupLegacyControllerTest {
         this.signupLegacyController = new SignupLegacyController(validateUser, sessionContext);
     }
 
-    @Test(expected = SignupLegacyException.class)
+    @Test(expected = FriendShipException.class)
     public void givenAUsernameAndPasswordIncorrectWhenInvokeSignUpThenReturnResponseError() throws Exception {
         //Given
         final String username = "user";

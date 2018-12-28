@@ -1,6 +1,6 @@
 package com.schibsted.spain.friends.legacy.context;
 
-import com.schibsted.spain.friends.legacy.exception.SignupLegacyException;
+import com.schibsted.spain.friends.legacy.exception.FriendShipException;
 import com.schibsted.spain.friends.legacy.model.User;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -72,7 +72,7 @@ public class SessionContextImplTest {
         MatcherAssert.assertThat(result.isPresent(), Matchers.is(true));
     }
 
-    @Test(expected = SignupLegacyException.class)
+    @Test(expected = FriendShipException.class)
     public void givenATwoUserWhenInvokePushUserThrowException() throws Exception {
         //Given
         final User user = new User("u", "p");

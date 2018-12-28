@@ -1,7 +1,7 @@
 package com.schibsted.spain.friends.legacy;
 
 import com.schibsted.spain.friends.legacy.context.SessionContext;
-import com.schibsted.spain.friends.legacy.exception.SignupLegacyException;
+import com.schibsted.spain.friends.legacy.exception.FriendShipException;
 import com.schibsted.spain.friends.legacy.model.User;
 import com.schibsted.spain.friends.legacy.validate.ValidateUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class SignupLegacyController {
 
   @PostMapping
   public ResponseEntity<String> signUp(@RequestParam("username") String username, @RequestHeader("X-Password") String password) {
-    final User user = validateUser.validateUser(username, password).orElseThrow(() -> new SignupLegacyException("Error username or password"));
+    final User user = validateUser.validateUser(username, password).orElseThrow(() -> new FriendShipException("Error username or password"));
     sessionContext.pushUser(user);
     return ResponseEntity.ok("OK");
   }

@@ -1,6 +1,6 @@
 package com.schibsted.spain.friends.legacy.service;
 
-import com.schibsted.spain.friends.legacy.exception.SignupLegacyException;
+import com.schibsted.spain.friends.legacy.exception.FriendShipException;
 import com.schibsted.spain.friends.legacy.model.User;
 import org.springframework.stereotype.Component;
 
@@ -26,7 +26,7 @@ public class FriendshipServiceImpl implements FriendshipService {
     public void pushFriendship(User userFrom, User userTo) {
         final Friendship friendship = new Friendship(userFrom, userTo);
         if (friendships.contains(friendship)) {
-            throw new SignupLegacyException("user that already has a pending request from ");
+            throw new FriendShipException("user that already has a pending request from ");
         }
         this.friendships.add(friendship);
     }
@@ -42,7 +42,7 @@ public class FriendshipServiceImpl implements FriendshipService {
                 filter(getRequestFriend(user)).
                 filter(this::pendingAcceptRequest).
                 findFirst()
-                .orElseThrow(() -> new SignupLegacyException("Not have request pending accept"));
+                .orElseThrow(() -> new FriendShipException("Not have request pending accept"));
         addFriendsMap(friendship.getUserTo().getUser(), friendship.getUserFrom());
         addFriendsMap(friendship.getUserFrom().getUser(), friendship.getUserTo());
     }
@@ -70,7 +70,7 @@ public class FriendshipServiceImpl implements FriendshipService {
     @Override
     public void declineRequestFriend(User user) {
         if (!this.friendships.removeIf(declineRequest(user))) {
-            throw new SignupLegacyException("Not have request for decline");
+            throw new FriendShipException("Not have request for decline");
         }
     }
 

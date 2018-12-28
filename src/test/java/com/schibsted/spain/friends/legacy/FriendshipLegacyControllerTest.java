@@ -1,11 +1,9 @@
 package com.schibsted.spain.friends.legacy;
 
 import com.schibsted.spain.friends.legacy.context.SessionContext;
-import com.schibsted.spain.friends.legacy.exception.SignupLegacyException;
+import com.schibsted.spain.friends.legacy.exception.FriendShipException;
 import com.schibsted.spain.friends.legacy.model.User;
 import com.schibsted.spain.friends.legacy.service.FriendshipService;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +13,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -32,7 +31,7 @@ public class FriendshipLegacyControllerTest {
         this.friendshipLegacyController = new FriendshipLegacyController(sessionContext,friendshipService);
     }
 
-    @Test(expected = SignupLegacyException.class)
+    @Test(expected = FriendShipException.class)
     public void givenAUsernameFromNotSessionWhenInvokeRequestFriendshipThenReturnSignupLegacyException() throws Exception {
         //Given
         final String usernameFrom = "a";
@@ -46,7 +45,7 @@ public class FriendshipLegacyControllerTest {
         //Then
     }
 
-    @Test(expected = SignupLegacyException.class)
+    @Test(expected = FriendShipException.class)
     public void givenAUsernameToNotRegisteredWhenInvokeRequestFriendshipThenReturnSignupLegacyException() throws Exception {
         //Given
         final String usernameFrom = "a";
@@ -61,7 +60,7 @@ public class FriendshipLegacyControllerTest {
         //Then
     }
 
-    @Test(expected = SignupLegacyException.class)
+    @Test(expected = FriendShipException.class)
     public void givenAUsernameFromAndUserNameToEqualsWhenInvokeRequestFriendshipThenReturnSignupLegacyException() throws Exception {
         //Given
         final String usernameFrom = "a";
@@ -93,7 +92,7 @@ public class FriendshipLegacyControllerTest {
         assertThat(result.getBody(), is("OK"));
     }
 
-    @Test(expected = SignupLegacyException.class)
+    @Test(expected = FriendShipException.class)
     public void givenAUsernameFromAndUserNameWhenInvokeAcceptFriendshipThenReturnException() throws Exception {
         //Given
         final String usernameFrom = "a";
@@ -124,7 +123,7 @@ public class FriendshipLegacyControllerTest {
 
 
 
-    @Test(expected = SignupLegacyException.class)
+    @Test(expected = FriendShipException.class)
     public void givenAUsernameFromAndUserNameWhenInvokeDeclineFriendshipThenReturnException() throws Exception {
         //Given
         final String usernameFrom = "a";
@@ -153,7 +152,7 @@ public class FriendshipLegacyControllerTest {
         verify(friendshipService).declineRequestFriend(any());
     }
 
-    @Test(expected = SignupLegacyException.class)
+    @Test(expected = FriendShipException.class)
     public void givenAUsernameAndPasswordWhenInvokeGetFriendshipThenReturnException() throws Exception {
         //Given
         final String username = "a";
